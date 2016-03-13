@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var url = require('url');
+var querystring = require('querystring');
 
 
 
@@ -11,20 +13,23 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/insert', function(req, res, next) {
-  var user = {};
-  user.name = 'majun2';
-  user.age = 31;
-  user.id = 2;
-  userDao.saveUser(user);
+  res.render('mongo/insert');
+});
+
+router.get('/save',function(req, res, next){
+  var paramStr = url.parse(req.url).query;
+  var data = querystring.parse(paramStr);
+  userDao.saveUser(data);
   res.send('success');
 });
 
 router.get('/find',function(req,res,next){
   userDao.findUser(function(result){
+    //console.log(result);
+    //console.log(result[0]);
+    //console.log(result[0].id);
     console.log(result);
-    console.log(result[0]);
-    console.log(result[0].id);
-    res.send(result[0].age+'');
+    res.render('mongo/find',{result:result});
   });
 });
 

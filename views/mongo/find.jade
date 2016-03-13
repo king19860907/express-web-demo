@@ -1,0 +1,9 @@
+html
+   head
+      link(rel='stylesheet', href='/stylesheets/style.css')
+   body
+      each user in result
+         div.result
+            sapn #{user.id}
+            span #{user.name}
+            span #{user.age}
