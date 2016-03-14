@@ -4,7 +4,10 @@ html
    body
       each user in result
          div.result
-            sapn #{user.username}
+            span #{user._id}
+            span #{user.username}
             span #{user.password}
             span #{user.name}
             span #{user.age}
+            span
+               a(href='/mongo/edit?id=#{user._id}') 编辑

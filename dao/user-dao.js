@@ -24,15 +24,41 @@ function saveUser(data){
     });
 }
 
-function findUser(func){
+function findUser(func,params){
     db.open(function(err,db){
         if(!err){
             db.collection(collectionName,{safe:true},function(err,collection){
                 if(err){
                     res.send(err);
                 }else{
-                    collection.find().toArray(function(err,docs){
+                    collection.find(params).toArray(function(err,docs){
                        func(docs);
+                    });
+                }
+            });
+        }else{
+            res.send(err);
+        }
+    });
+}
+
+/**
+ * 根据id查询单条记录
+ * @param id
+ * @param func
+ */
+function findUserById(id,func){
+    console.log(id);
+    db.open(function(err,db){
+        if(!err){
+            db.collection(collectionName,{safe:true},function(err,collection){
+                if(err){
+                    res.send(err);
+                }else{
+                    var objectId = mongodb.ObjectID;
+                    collection.find({_id:objectId(id)}).toArray(function(err,docs){
+                        db.close();
+                        func(docs);
                     });
                 }
             });
@@ -44,3 +70,4 @@ function findUser(func){
 
 exports.saveUser = saveUser;
 exports.findUser = findUser;
+exports.findUserById = findUserById;

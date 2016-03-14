@@ -1,0 +1,14 @@
+//
+   Created by majun on 16-3-13.
+//input#id id
+#userinfo
+    form(action="update" method="get")
+      div username
+        input#username(name="username" value="#{user.username}")
+      div password
+        input#password(name="password" value="#{user.password}")
+      div 姓名
+        input#name(name="name" value="#{user.name}")
+      div 年龄
+        input#age(name="age" value="#{user.age}")
+      input#submit(type="submit")

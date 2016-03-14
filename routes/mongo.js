@@ -19,6 +19,15 @@ router.get('/insert', function(req, res, next) {
   res.render('mongo/insert');
 });
 
+router.get("/edit",function(req, res, next){
+  var paramStr = url.parse(req.url).query;
+  var params = querystring.parse(paramStr);
+  userDao.findUserById(params.id,function(result){
+    console.log(result);
+    res.render("mongo/edit",{user:result[0]});
+  });
+});
+
 router.get('/save',function(req, res, next){
   var paramStr = url.parse(req.url).query;
   var data = querystring.parse(paramStr);
