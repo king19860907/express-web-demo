@@ -3,12 +3,7 @@
  */
 var mongodb = require('mongodb');
 
-var dbServer = '192.168.99.100';
-var dbName = 'mydb';
-var collectionName = 'user';
-
-
-var server = new mongodb.Server(dbServer,32774,{auto_reconnect:true});
+var server = new mongodb.Server(dbServer,dbport,{auto_reconnect:true});
 var db = new mongodb.Db(dbName,server,{safe:true});
 
 function saveUser(data){

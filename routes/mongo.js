@@ -3,7 +3,10 @@ var router = express.Router();
 var url = require('url');
 var querystring = require('querystring');
 
-
+global.dbServer = '192.168.99.100';
+global.dbName = 'mydb';
+global.collectionName = 'user';
+global.dbport = 32768;
 
 var userDao = require('../dao/user-dao');
 
@@ -25,10 +28,6 @@ router.get('/save',function(req, res, next){
 
 router.get('/find',function(req,res,next){
   userDao.findUser(function(result){
-    //console.log(result);
-    //console.log(result[0]);
-    //console.log(result[0].id);
-    console.log(result);
     res.render('mongo/find',{result:result});
   });
 });
