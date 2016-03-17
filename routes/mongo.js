@@ -2,16 +2,14 @@ var express = require('express');
 var router = express.Router();
 var url = require('url');
 var querystring = require('querystring');
-
-global.dbServer = '192.168.99.100';
-global.dbName = 'mydb';
-global.collectionName = 'user';
-global.dbport = 32768;
-
 var userDao = require('../dao/user-dao');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  if(!req.session.user){
+    res.redirect("/");
+    return;
+  }
   res.render('mongo/index', { title: 'mongo' });
 });
 

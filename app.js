@@ -5,9 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+global.dbServer = '192.168.99.100';
+global.dbName = 'mydb';
+global.collectionName = 'user';
+global.dbport = 32768;
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var mongo = require('./routes/mongo');
+var session = require('./init/session');
 
 var app = express();
 
@@ -22,6 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session);
 
 app.use('/', routes);
 app.use('/users', users);

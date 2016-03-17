@@ -1,6 +1,8 @@
-extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
-  h2 #{content}
+#login
+  form(action="login" method="post")
+    div username
+      input#username(name="username")
+    div password
+      input#password(name="password" type="password")
+    input#submit(type="submit")
