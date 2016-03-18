@@ -6,10 +6,6 @@ var userDao = require('../dao/user-dao');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  if(!req.session.user){
-    res.redirect("/");
-    return;
-  }
   res.render('mongo/index', { title: 'mongo' });
 });
 
